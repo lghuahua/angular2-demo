@@ -1,0 +1,35 @@
+<header>
+  <div class="container">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" routerLink="/#">Angular2 Rails Example</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navItems">
+            <span class="sr-only" Toggle navigation></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navItems">
+          <ul class="nav navbar-nav">
+            <li>
+              <a routerLink="list">
+                <i class="fa fa-database mr-2"></i> 列表
+              </a>
+            </li>
+            <li>
+              <a routerLink="login">
+                <i class="fa fa-database mr-2"></i> 登录
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="container" id="main">
+  <router-outlet></router-outlet>
+</div>

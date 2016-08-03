@@ -3,7 +3,7 @@ import { ROUTER_DIRECTIVES, ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'helloWorld',
-  templateUrl: './app.html',
+  templateUrl: 'components/main/app.html',
   directives: [ROUTER_DIRECTIVES]
 })
 

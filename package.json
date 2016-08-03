@@ -4,10 +4,9 @@
   "description": "angular2_demo",
   "main": "angular2.js",
   "scripts": {
-    "browserify": "browserify -t babelify ./bootstrap.js -o ./bundle.js",
+    "browserify": "browserify -t babelify ./public/bootstrap.js -o ./public/bundle.js",
     "uglifyjs": "uglifyjs bundle.js --screw-ie8 --compress > bundle.min.js",
-    "lite": "lite-server",
-    "start": "npm run uglifyjs & npm run lite",
+    "start": "npm run uglifyjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -24,8 +23,12 @@
     "@angular/router-deprecated": "^2.0.0-rc.2",
     "@angular/upgrade": "^2.0.0-rc.4",
     "babel-polyfill": "^6.3.14",
+    "body-parser": "^1.15.2",
     "es6-promise": "^3.2.1",
     "es6-shim": "^0.33.13",
+    "express": "^4.14.0",
+    "mongoose-unique-validator": "^1.0.2",
+    "morgan": "^1.7.0",
     "reflect-metadata": "^0.1.3",
     "rxjs": "^5.0.0-beta.6",
     "uglify-js": "^1.3.5",
@@ -40,9 +43,8 @@
     "babel-plugin-transform-flow-strip-types": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
     "babelify": "^7.3.0",
-    "bootstrap": "^3.3.6",
-    "jquery": "^3.1.0",
-    "lite-server": "^2.2.2",
+    "browserify": "^13.1.0",
+    "mongoose": "^4.5.7",
     "watchify": "^3.7.0"
   }
 }

@@ -6,8 +6,12 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-var users = require('./routes/users');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(morgan('dev'));
+
+var users = require('./routes/users');
 app.use('/public', express.static(__dirname + '/public'));
 app.use('/public/scripts', express.static(__dirname + '/node_modules'));
 app.use(express.static('./'))

@@ -10,10 +10,12 @@ db.on('error', function(error) {
 
 // Schema 结构
 var userSchema = new mongoose.Schema({
-    id      : {type : Number},
-    name : {type : String, default : '匿名用户'},
-    address  : {type : String},
-    time     : {type : Date, default: Date.now}
+    id        : { type : Number },
+    name      : { type : String, required: true},
+    password  : { type : String, required: true},
+    address   : { type : String },
+    age       : { type : Number },
+    time      : { type : Date,  default: Date.now}
 });
 
 userSchema.plugin(uniqueValidator);

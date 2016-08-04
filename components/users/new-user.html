@@ -1,0 +1,23 @@
+<div class='row'>
+  <div class="col-xs-12 col-md-8 well well-lg">
+    <form [formGroup]="adduserform" (ngSubmit)="addUser()" style="width:300px;margin:0 auto">
+      <div class='form-group'>
+        <label class="form-label">用户名:</label>
+        <input type="text" class="form-control" name="name" placeholder="Name" formControlName="name">
+      </div>
+      <div class='form-group'>
+        <label class="form-label">密码:</label>
+        <input type="password" class="form-control" name="password" formControlName="password">
+      </div>
+      <div class='form-group'>
+        <label class="form-label">年纪:</label>
+        <input type="number" class="form-control" name="age" min="0" step="1" formControlName="age">
+      </div>
+      <div class='form-group'>
+        <label class="form-label">地址:</label>
+        <input type="text" class="form-control" name="address" formControlName="address">
+      </div>
+      <button type="submit" class="btn btn-primary" style="margin-left: 7em;" [disabled]="!adduserform.valid">保存</button>
+    </form>
+  </div>
+</div>

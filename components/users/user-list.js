@@ -4,24 +4,23 @@ import {  Http, Headers, RequestOptions }     from '@angular/http';
 import { FormGroup, FormControl, Validators,
   FormBuilder, REACTIVE_FORM_DIRECTIVES }     from '@angular/forms';
 
-
 @Component({
-  moduleId: module.id,
+  moduleId:    module.id,
   templateUrl: 'components/users/user-list.html',
-  directives: [REACTIVE_FORM_DIRECTIVES]
+  directives:  [REACTIVE_FORM_DIRECTIVES]
 })
 
 export class UserListComponent {
   users = [];
-  user = {};
+  user  = {};
   options = new RequestOptions({ headers: new Headers({
     'Content-Type': "application/json",
     'charset': "UTF-8" })
   });
   isEditing = false;
-  infoMsg = { body: "", type: "info"};
+  infoMsg   = { body: "", type: "info"};
   constructor(http: Http, formBuilder: FormBuilder, router: Router) {
-    this.http = http;
+    this.http   = http;
     this.router = router;
   }
 
@@ -31,7 +30,7 @@ export class UserListComponent {
 
   loadUser(){
     this.http.get('/users').map(res => res.json()).subscribe(
-      data => this.users =data,
+      data  => this.users =data,
       error => console.log(error)
     );
   }

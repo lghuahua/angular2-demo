@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var uniqueValidator = require('mongoose-unique-validator');
+var mongoose        =  require('mongoose');
+var uniqueValidator =  require('mongoose-unique-validator');
 mongoose.connect('mongodb://127.0.0.1:27017/angular_mongo');
-var db = mongoose.connection;
+var db              =  mongoose.connection;
 
 // 链接错误
 db.on('error', function(error) {

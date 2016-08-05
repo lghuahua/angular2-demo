@@ -1,7 +1,7 @@
-var express = require('express');
-var path = require('path');
-var morgan = require('morgan'); // logger
-var assert = require('assert');
+var express    = require('express');
+var path       = require('path');
+var morgan     = require('morgan'); // logger
+var assert     = require('assert');
 var bodyParser = require('body-parser');
 
 var app = express();
@@ -23,8 +23,6 @@ app.use('/users', users);
 app.get('/*', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

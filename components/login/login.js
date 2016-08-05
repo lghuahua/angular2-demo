@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {  Http, Headers, RequestOptions, HTTP_PROVIDERS } from '@angular/http';
 import { Router }              from '@angular/router';
+import {  Http, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder, REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 
 @Component({
   moduleId: module.id,
   templateUrl: 'components/login/login.html',
-  providers: [HTTP_PROVIDERS],
   directives: [REACTIVE_FORM_DIRECTIVES]
 })
 

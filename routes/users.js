@@ -3,8 +3,15 @@ var User       = require('../models/user');
 var router     = express.Router();
 var bodyParser = require('body-parser');
 
-router.get('/login', function(req, res) {
-  res.sendStatus(200);
+router.post('/login', function(req, res) {
+  User.findOne({name: req.body.name, password: req.body.password}, function(err, obj){
+    if(err) return console.error(err);
+    if(obj){
+      res.sendStatus(200);
+    }else{
+      res.sendStatus(401); //未授权：登录失败
+    }
+  })
 });
 
 router.get('/',function(req, res){

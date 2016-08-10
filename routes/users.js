@@ -17,6 +17,7 @@ router.post('/login', function(req, res) {
 router.get('/',function(req, res){
   User.find({}, function(err, docs){
     if(err) return console.error(err);
+    debugger
     res.json(docs);
   })
 })

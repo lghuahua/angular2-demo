@@ -24,7 +24,7 @@ export class NewUserComponent {
   age = new FormControl("");
   address = new FormControl("");
 
-  constructor(http: Http, formBuilder: FormBuilder, router: Router) {
+  constructor(private http: Http, private formBuilder: FormBuilder, private router: Router) {
     this.adduserform = formBuilder.group({
       id: this.id,
       name: this.name,
@@ -32,8 +32,8 @@ export class NewUserComponent {
       age: this.age,
       address: this.address
     });
-    this.http = http;
-    this.router = router
+    // this.http = http;
+    // this.router = router
   }
   addUser() {
     var router = this.router

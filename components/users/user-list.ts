@@ -3,14 +3,16 @@ import { Router }                             from '@angular/router';
 import {  Http, Headers, RequestOptions }     from '@angular/http';
 import { FormGroup, FormControl, Validators,
   FormBuilder, REACTIVE_FORM_DIRECTIVES }     from '@angular/forms';
+import { UserService } from './user.service';
 
 @Component({
   moduleId:    module.id,
   templateUrl: 'components/users/user-list.html',
-  directives:  [REACTIVE_FORM_DIRECTIVES]
+  directives:  [REACTIVE_FORM_DIRECTIVES],
+  providers: [UserService]
 })
 
-export class UserListComponent {
+export class UserListComponent implements OnInit{
   users = [];
   user  = {};
   options = new RequestOptions({ headers: new Headers({
@@ -19,20 +21,16 @@ export class UserListComponent {
   });
   isEditing = false;
   infoMsg   = { body: "", type: "info"};
-  constructor(http: Http, formBuilder: FormBuilder, router: Router) {
-    this.http   = http;
-    this.router = router;
-  }
-
-  ngOnInit() {
-    this.loadUser();
-  }
+  error: any;
+  constructor(private http: Http,
+              private formBuilder: FormBuilder,
+              private router: Router,
+              private service: UserService) {}
 
   loadUser(){
-    this.http.get('/users').map(res => res.json()).subscribe(
-      data  => this.users =data,
-      error => console.log(error)
-    );
+    this.service.getUsers()
+                .then(data => this.users = data)
+                .catch(error => this.error = error);
   }
 
   sendInfoMsg(body, type, time = 3000) {
@@ -47,15 +45,24 @@ export class UserListComponent {
   }
 
   submitEdit(user) {
-    this.http.put("/users/"+user._id, JSON.stringify(user), this.options).subscribe(
-      res => {
-        this.isEditing = false;
-        this.user = user;
-        this.sendInfoMsg("item edited successfully.", "success");
-      },
-      error => console.log(error)
-    );
+    this.service.editUser(user)
+                  .then(function(){
+                    this.isEditing = false
+                    this.sendInfoMsg("item edited successfully.", "success");
+                  })
+                  .catch(error => this.error = error);
   }
+
+  // submitEdit(user) {
+  //   this.http.put("/users/"+user._id, JSON.stringify(user), this.options).subscribe(
+  //     res => {
+  //       this.isEditing = false;
+  //       this.user = user;
+  //       this.sendInfoMsg("item edited successfully.", "success");
+  //     },
+  //     error => console.log(error)
+  //   );
+  // }
 
   cancelEditing() {
     this.isEditing = false;
@@ -75,5 +82,10 @@ export class UserListComponent {
         error => console.log(error)
       );
     }
+  }
+
+  ngOnInit() {
+    this.loadUser();
+    this.isEditing = false;
   }
 }

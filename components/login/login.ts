@@ -1,4 +1,4 @@
-import { Component, OnInit }                    from '@angular/core';
+import { Component }                    from '@angular/core';
 import { Router }                               from '@angular/router';
 import {  Http, Headers, RequestOptions }       from '@angular/http';
 import { FormGroup, FormControl, Validators,
@@ -10,20 +10,20 @@ import { FormGroup, FormControl, Validators,
   directives:  [REACTIVE_FORM_DIRECTIVES]
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   user = [];
   options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8' }) });
 	infoMsg = { body: "", type: "info"};
   userform: FormGroup;
   name     = new FormControl("", Validators.required);
   password = new FormControl("", Validators.required);
-  constructor(http: Http, formBuilder: FormBuilder, router: Router) {
+  constructor(private http: Http, private formBuilder: FormBuilder, private router: Router) {
     this.userform = formBuilder.group({
       name:     this.name,
       password: this.password
     });
-    this.http   = http;
-    this.router = router
+    // this.http   = http;
+    // this.router = router
   }
 
   login() {

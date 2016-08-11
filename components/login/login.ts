@@ -22,15 +22,13 @@ export class LoginComponent {
       name:     this.name,
       password: this.password
     });
-    // this.http   = http;
-    // this.router = router
   }
 
   login() {
-    var router = this.router
     this.http.post("/users/login", JSON.stringify(this.userform.value), this.options).subscribe(
       res => {
-        router.navigate(['list'])
+        console.log(JSON.parse(res._body).token);
+        this.router.navigate(['list'])
       },
       error => console.log(error)
     );

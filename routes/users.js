@@ -2,22 +2,23 @@ var express    = require('express');
 var User       = require('../models/user');
 var router     = express.Router();
 var bodyParser = require('body-parser');
+var tokenCur   = require('../helpers/sessions.js')
 
-router.post('/login', function(req, res) {
-  User.findOne({name: req.body.name, password: req.body.password}, function(err, obj){
-    if(err) return console.error(err);
-    if(obj){
-      res.sendStatus(200);
-    }else{
-      res.sendStatus(401); //未授权：登录失败
-    }
-  })
-});
+router.post('/login', tokenCur.login);
+  // function(req, res) {
+  // User.findOne({name: req.body.name, password: req.body.password}, function(err, obj){
+  //   if(err) return console.error(err);
+  //   if(obj){
+  //     res.sendStatus(200);
+  //   }else{
+  //     res.sendStatus(401); //未授权：登录失败
+  //   }
+  // })
+// });
 
 router.get('/',function(req, res){
   User.find({}, function(err, docs){
     if(err) return console.error(err);
-    debugger
     res.json(docs);
   })
 })

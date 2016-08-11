@@ -15,7 +15,8 @@ var userSchema = new mongoose.Schema({
     password  : { type : String, required: true},
     address   : { type : String },
     age       : { type : Number },
-    time      : { type : Date,  default: Date.now}
+    time      : { type : Date,  default: Date.now},
+    session   : { type : String }
 });
 
 userSchema.plugin(uniqueValidator);

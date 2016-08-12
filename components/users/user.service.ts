@@ -9,12 +9,15 @@ import 'rxjs/add/operator/toPromise';
 
 export class UserService {
   user = {};
+  token = window.sessionStorage.getItem('token');
   constructor(private http: Http){
   }
 
-
   getUsers() {
-    return this.http.get('/users')
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('x-access-token', this.token);
+    return this.http.get('/users', {headers: headers})
                 .toPromise()
                 .then(response => response.json())
                 .catch(this.handleError);

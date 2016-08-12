@@ -10,13 +10,56 @@ exports.login = function(req, res) {
     }
     return loginProcess(req, res, user);
   })
+};
+
+exports.regist = function(user){
+  return createToken(user);
 }
 
 function loginProcess(req, res, user){
-  var token = jwt.sign({user: 'hhhh'}, tokenConfig.SECRET_KEY, {
-        expiresIn: tokenConfig.EXP_TIME
-    });
+  token = createToken(user);
+  user.token = token;
+  user.save;
   return res.status(200).json({
     token: token
   })
+}
+//创建
+function createToken(user){
+  var token = jwt.sign({id: user._id}, tokenConfig.SECRET_KEY, {
+        expiresIn: tokenConfig.EXP_TIME
+    });
+  return token;
+}
+//验证
+// function verifyToken(req, res, user){
+//   jwt.verify(token, tokenConfig.SECRET_KEY, function(err, decoded){
+//     if(err){
+//       return res.status(401).json({
+//         message: err.name
+//         })
+//     }
+//   })
+// }
+
+exports.isAuth = function(req, res, next){
+  var token = req.headers['x-access-token']
+  if(!token){
+    return res.status(403).json({
+      message: 'Invalid Headers'
+    })
+  }
+  jwt.verify(token, tokenConfig.SECRET_KEY, function(err, decoded){
+    if(err){
+      return res.status(401).json({
+        message: err.name
+      })
+    } else {
+        next();
+      }
+  });
+}
+//清除
+function cleanToken(req, res){
+
 }

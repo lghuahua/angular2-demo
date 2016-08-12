@@ -39,6 +39,7 @@ export class NewUserComponent {
     var router = this.router
     this.http.post("/users/new-user", JSON.stringify(this.adduserform.value), this.options).subscribe(
       res => {
+        window.sessionStorage.setItem('token', JSON.parse(res._body).token),
         router.navigate(['list'])
       },
       error => console.log(error)

@@ -4,6 +4,7 @@ import {  Http, Headers, RequestOptions }       from '@angular/http';
 import { FormGroup, FormControl, Validators,
  FormBuilder, REACTIVE_FORM_DIRECTIVES }        from '@angular/forms';
 
+
 @Component({
   moduleId:    module.id,
   templateUrl: 'components/login/login.html',
@@ -12,7 +13,8 @@ import { FormGroup, FormControl, Validators,
 
 export class LoginComponent {
   user = [];
-  options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8' }) });
+  token = window.sessionStorage.getItem('token');
+  options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8', 'x-access-token':this.token }) });
 	infoMsg = { body: "", type: "info"};
   userform: FormGroup;
   name     = new FormControl("", Validators.required);
@@ -27,7 +29,7 @@ export class LoginComponent {
   login() {
     this.http.post("/users/login", JSON.stringify(this.userform.value), this.options).subscribe(
       res => {
-        console.log(JSON.parse(res._body).token);
+        window.sessionStorage.setItem('token', JSON.parse(res._body).token);
         this.router.navigate(['list'])
       },
       error => console.log(error)

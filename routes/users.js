@@ -5,18 +5,9 @@ var bodyParser = require('body-parser');
 var tokenCur   = require('../helpers/sessions.js')
 
 router.post('/login', tokenCur.login);
-  // function(req, res) {
-  // User.findOne({name: req.body.name, password: req.body.password}, function(err, obj){
-  //   if(err) return console.error(err);
-  //   if(obj){
-  //     res.sendStatus(200);
-  //   }else{
-  //     res.sendStatus(401); //未授权：登录失败
-  //   }
-  // })
-// });
 
-router.get('/',function(req, res){
+
+router.get('/', tokenCur.isAuth, function(req, res){
   User.find({}, function(err, docs){
     if(err) return console.error(err);
     res.json(docs);
@@ -30,6 +21,8 @@ router.post('/new-user', function(req, res) {
     address:  req.body.address,
     age:      req.body.age
   });
+  token = tokenCur.regist(user);
+  user.token = token;
   user.save(function(err, result){
     if(err){
       return res.status(404).json({
@@ -39,7 +32,8 @@ router.post('/new-user', function(req, res) {
     }
     res.status(200).json({
       message: 'Save message',
-      obj:     result
+      obj:     result,
+      token:   token
     });
   })
 });
@@ -64,5 +58,7 @@ router.delete('/:id', function(req, res){
     res.sendStatus(200);
   })
 })
+
+router.get('/logout')
 
 module.exports = router;

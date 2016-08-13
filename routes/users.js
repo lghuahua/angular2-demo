@@ -2,7 +2,7 @@ var express    = require('express');
 var User       = require('../models/user');
 var router     = express.Router();
 var bodyParser = require('body-parser');
-var tokenCur   = require('../helpers/sessions.js')
+var tokenCur   = require('../helpers/sessions.js');
 
 router.post('/login', tokenCur.login);
 
@@ -15,27 +15,44 @@ router.get('/', tokenCur.isAuth, function(req, res){
 })
 
 router.post('/new-user', function(req, res) {
-  var user = new User({
-    name:     req.body.name,
-    password: req.body.password,
-    address:  req.body.address,
-    age:      req.body.age
-  });
-  token = tokenCur.regist(user);
-  user.token = token;
-  user.save(function(err, result){
-    if(err){
-      return res.status(404).json({
-        title: 'An error occurred',
-        error: err
+  User.find({name: req.body.name}, function(err, obj){
+    console.log(obj)
+    console.log(err)
+    if(err) {
+      res.status(404).json({
+        message: 'An error occurred'
       });
     }
-    res.status(200).json({
-      message: 'Save message',
-      obj:     result,
-      token:   token
-    });
+    if(!obj[0]) {
+      var user      = new User();
+      user.name     = req.body.name;
+      user.password = user.generateHash(req.body.password);
+      user.address  = req.body.address;
+      user.age      = req.body.age;
+
+      token = tokenCur.regist(user);
+      user.token = token;
+      user.save(function(err, result){
+        if(err){
+          return res.status(404).json({
+            title: 'An error occurred',
+            error: err
+          });
+        }
+        res.status(200).json({
+          message: 'Save message',
+          obj:     result,
+          token:   token
+        });
+      })
+    } else {
+      res.status(406).json({
+        message: 'User already exists'
+      });
+    }
+
   })
+
 });
 
 router.get('/:id', function(req, res){
@@ -59,6 +76,6 @@ router.delete('/:id', function(req, res){
   })
 })
 
-router.get('/logout')
+// router.get('/logout', function())
 
 module.exports = router;

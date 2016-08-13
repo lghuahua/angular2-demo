@@ -1,11 +1,16 @@
-import {Component} from '@angular/core';
+import { Component }     from '@angular/core';
+import { Router }        from '@angular/router';
 
 @Component({
   moduleId: module.id,
-  template: '<h1>Hello World !!!</h1>'
+  templateUrl: 'components/hello/hello-world.html'
 })
 
 export class HelloWorldComponent {
-  constructor() {
+  constructor(private router: Router) {
+  }
+
+  login() {
+    this.router.navigate(['login'])
   }
 }

@@ -3,10 +3,17 @@ var tokenConfig = require('../configs/token.config.js');
 var User       = require('../models/user');
 
 exports.login = function(req, res) {
-  User.findOne({name: req.body.name, password: req.body.password}, function(err, user){
+  User.findOne({name: req.body.name}, function(err, user){
     if(err) return res.status(500).jsonp(err);
     if(!user){
-      return res.sendStatus(404)
+      return res.sendStatus(404).json({
+        message: 'Invalid name or password'
+      })
+    }
+    if(!user.validPassword(req.body.password)){
+      return res.status(401).json({
+        message: 'Invalid name or password'
+      })
     }
     return loginProcess(req, res, user);
   })

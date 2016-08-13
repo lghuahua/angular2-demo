@@ -3,6 +3,14 @@ var path       = require('path');
 var morgan     = require('morgan'); // logger
 var assert     = require('assert');
 var bodyParser = require('body-parser');
+var mongoose        =  require('mongoose');
+
+var configDB = require('./configs/mongo.config');
+mongoose.connect(configDB.url, function (err) {
+    if (err)
+        console.log(err);
+});
+
 
 var app = express();
 

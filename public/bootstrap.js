@@ -6,6 +6,9 @@ var routes_1 = require('../components/routes');
 var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
+// import 'jquery'
+global.jQuery = require('jquery');
+require('bootstrap');
 var components_1 = require('../components/components');
 platform_browser_dynamic_1.bootstrap(components_1.AppComponent, [
     routes_1.appRouterProviders,

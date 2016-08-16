@@ -36,5 +36,11 @@
 </header>
 
 <div class="container" id="main">
+  <div *ngIf="informsg" class="alert alert-{{errortype}} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Message:</strong> {{informsg}}
+  </div>
   <router-outlet></router-outlet>
 </div>

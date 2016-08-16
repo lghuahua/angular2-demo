@@ -1,4 +1,5 @@
 <div class='row'>
+  <h2>新用户注册</h2>
   <div class="col-xs-12 col-md-8 well well-lg">
     <form [formGroup]="adduserform" (ngSubmit)="addUser()" style="width:300px;margin:0 auto">
       <div class='form-group'>
@@ -8,6 +9,10 @@
       <div class='form-group'>
         <label class="form-label">密码:</label>
         <input type="password" class="form-control" name="password" formControlName="password">
+      </div>
+      <div class='form-group'>
+        <label class="form-label">确认密码:</label>
+        <input type="password" class="form-control" name="confirm_password" formControlName="confirm_password">
       </div>
       <div class='form-group'>
         <label class="form-label">年纪:</label>

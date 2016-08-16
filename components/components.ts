@@ -4,4 +4,4 @@ export * from './login/login';
 export * from './users/new-user';
 export * from './users/user-list';
 
-
+export * from './users/user';

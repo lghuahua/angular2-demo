@@ -16,8 +16,6 @@ router.get('/', tokenCur.isAuth, function(req, res){
 
 router.post('/new-user', function(req, res) {
   User.find({name: req.body.name}, function(err, obj){
-    console.log(obj)
-    console.log(err)
     if(err) {
       res.status(404).json({
         message: 'An error occurred'
@@ -41,7 +39,7 @@ router.post('/new-user', function(req, res) {
         }
         res.status(200).json({
           message: 'Save message',
-          obj:     result,
+          userobj:     result,
           token:   token
         });
       })

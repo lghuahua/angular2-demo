@@ -36,7 +36,7 @@ export class UserListComponent implements OnInit{
   sendInfoMsg(body, type, time = 3000) {
     this.infoMsg.body = body;
     this.infoMsg.type = type;
-    window.setTimeout(() => this.infoMsg.body = "", time);
+    setTimeout(() => this.infoMsg.body = "", time);
   }
 
   enableEditing(user) {

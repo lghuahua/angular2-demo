@@ -32,10 +32,19 @@ header {
 .alert {
   z-index: 999;
   position: fixed;
-  bottom: 15px;
+  /*bottom: 15px;*/
   left: 25%;
   width: 50%;
   opacity: 0.9;
+}
+
+.userleft {
+  float: left;
+  width: 30%;
+}
+
+.userright {
+  float: left;
 }
 
 table th, table tr td {

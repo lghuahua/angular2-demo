@@ -11,7 +11,7 @@ const routes: RouterConfig = [
   { path: 'home', component: HelloWorldComponent },
   { path: 'login', component: LoginComponent },
   { path: 'new_user', component: NewUserComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'user/:name', component: UserComponent },
   { path: 'list', component: UserListComponent },
   { path: '**', component: HelloWorldComponent }
 ];

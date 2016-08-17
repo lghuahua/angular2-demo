@@ -37,7 +37,7 @@ export class LoginComponent {
                 .then(res => {
                   sessionStorage.setItem('token', res.token);
                   this.service.setCurrentUser(res.userobj);
-                  this.router.navigate(['user'])
+                  this.router.navigate(['user',res.userobj.name])
                 })
                 .catch(error => this.sendInfoMsg(error, "warning", 2000))
   }

@@ -79,4 +79,11 @@ export class UserService {
                 .catch(this.handleError)
   }
 
+  logout(){
+    if(this.currentUser){
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('currentUser')
+      this.router.navigate(['home'])
+    }
+  }
 }

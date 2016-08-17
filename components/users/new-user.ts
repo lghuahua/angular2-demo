@@ -46,14 +46,14 @@ export class NewUserComponent {
   sendInfoMsg(body, type, time = 3000) {
     this.errorService.p_informsg(body);
     this.errorService.p_type(type);
-    window.setTimeout(() => this.errorService.p_informsg(''), time);
+    setTimeout(() => this.errorService.p_informsg(''), time);
   }
 
   addUser() {
     if(this.adduserform.value.password == this.adduserform.value.confirm_password){
       this.http.post("/users/new-user", JSON.stringify(this.adduserform.value), this.options).subscribe(
         res => {
-          window.sessionStorage.setItem('token', JSON.parse(res._body).token);
+          sessionStorage.setItem('token', JSON.parse(res._body).token);
           this.sendInfoMsg('注册成功','info');
           this.service.setCurrentUser(JSON.parse(res._body).userobj);
           this.router.navigate(['user'])

@@ -3,22 +3,18 @@ import { Router }                             from '@angular/router';
 import {  Http, Headers, RequestOptions }     from '@angular/http';
 import { ErrorService } from '../error.service';
 import { UserService } from './user.service';
+import { User } from './user.model';
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'components/users/user.html',
-  providers: [UserService]
+  templateUrl: 'components/users/user.html'
 })
 
 export class UserComponent implements OnInit{
-  constructor(private http: Http,
-              private router: Router,
-              private errorService: ErrorService,
-              private service: UserService){}
-  user = {};
+  private user:User = new User();
+  constructor(){}
 
   ngOnInit(){
-    this.user = this.service.getCurrentUser();
+    this.user = JSON.parse(sessionStorage.getItem('currentUser'))
   }
-
 }

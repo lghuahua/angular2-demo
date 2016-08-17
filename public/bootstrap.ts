@@ -1,4 +1,5 @@
-import 'zone.js';
+import 'core-js/es6';
+import 'zone.js/dist/zone';
 import 'reflect-metadata';
 import 'babel-polyfill';
 import { appRouterProviders } from '../components/routes'

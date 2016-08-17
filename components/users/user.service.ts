@@ -4,6 +4,7 @@ import {  Http, Headers, RequestOptions}     from '@angular/http';
 import { FormGroup, FormControl, Validators,
   FormBuilder, REACTIVE_FORM_DIRECTIVES }     from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
+import {AuthHttp, JwtHelper} from "angular2-jwt";
 
 import { User } from './user.model';
 
@@ -11,17 +12,27 @@ import { User } from './user.model';
 @Injectable()
 
 export class UserService {
-  user = {};
-  currentUser = User;
+  currentUser:User = new User();
   options = new RequestOptions;
+  private _jwtHelper:JwtHelper = new JwtHelper();
   constructor(private http: Http){
-    var userLocal = sessionStorage.getItem('currentUser');
-    var token = sessionStorage.getItem('token');
+    let userLocal = sessionStorage.getItem('currentUser');
+    let token = sessionStorage.getItem('token');
     this.options = new RequestOptions({ headers: new Headers({
       'Content-Type': "application/json",
       'charset': "UTF-8",
       'x-access-token': token})
     });
+    if(userLocal && token){
+      let currentUser = JSON.parse(userLocal);
+      let decode = this._jwtHelper.decodeToken(token);
+      if(currentUser._id != decode.id){
+        sessionStorage.removeItem('currentUser');
+        return;
+      }
+      userLocal = JSON.parse(userLocal);
+      this.currentUser = userLocal;
+    }
   }
 
   getUsers() {

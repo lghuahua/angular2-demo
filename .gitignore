@@ -2,6 +2,6 @@
 log/**/*
 tmp/**/*
 node_modules/**/*
-bundle.js
-bundle.min.js
 typings
+components/**/*.js
+public/*.js

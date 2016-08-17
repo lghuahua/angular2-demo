@@ -1,6 +1,6 @@
 import { Component }         from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
-import { ErrorService } from '../error.service';
+import { ErrorService } from '../services/error.service';
 
 @Component({
   selector:    'helloWorld',

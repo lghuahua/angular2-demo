@@ -3,8 +3,8 @@ import { Router }                             from '@angular/router';
 import {  Http, Headers, RequestOptions }     from '@angular/http';
 import { FormGroup, FormControl, Validators,
   FormBuilder, REACTIVE_FORM_DIRECTIVES }     from '@angular/forms';
-import { UserService } from './user.service';
-import { ErrorService } from '../error.service';
+import { UserService } from '../services/user.service';
+import { ErrorService } from '../services/error.service';
 
 @Component({
   moduleId: module.id,
@@ -51,17 +51,14 @@ export class NewUserComponent {
 
   addUser() {
     if(this.adduserform.value.password == this.adduserform.value.confirm_password){
-      this.http.post("/users/new-user", JSON.stringify(this.adduserform.value), this.options).subscribe(
-        res => {
-          sessionStorage.setItem('token', JSON.parse(res._body).token);
-          this.sendInfoMsg('注册成功','info');
-          this.service.setCurrentUser(JSON.parse(res._body).userobj);
-          this.router.navigate(['user'])
-        },
-        error => {
-          this.sendInfoMsg(JSON.parse(error._body).message, "warning")
-        }
-      );
+      this.service.addNewUser(JSON.stringify(this.adduserform.value))
+                  .then(res => {
+                    sessionStorage.setItem('token', res.token);
+                    this.sendInfoMsg('注册成功','success');
+                    this.service.setCurrentUser(res.userobj);
+                    this.router.navigate(['user'])
+                  })
+                  .catch(error => this.sendInfoMsg(error.message, "warning", 2000))
     } else {
       this.sendInfoMsg("两次输入密码不同", "warning")
     }

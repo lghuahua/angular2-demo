@@ -1,8 +1,8 @@
 import { Component, OnInit }                  from '@angular/core';
 import { Router }                             from '@angular/router';
 import {  Http, Headers, RequestOptions }     from '@angular/http';
-import { ErrorService } from '../error.service';
-import { UserService } from './user.service';
+import { ErrorService } from '../services/error.service';
+import { UserService } from '../services/user.service';
 import { User } from './user.model';
 
 @Component({

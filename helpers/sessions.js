@@ -28,7 +28,8 @@ function loginProcess(req, res, user){
   user.token = token;
   user.save;
   return res.status(200).json({
-    token: token
+    token: token,
+    userobj: user
   })
 }
 //创建

@@ -3,7 +3,7 @@ import { Router }                             from '@angular/router';
 import {  Http, Headers, RequestOptions }     from '@angular/http';
 import { FormGroup, FormControl, Validators,
   FormBuilder, REACTIVE_FORM_DIRECTIVES }     from '@angular/forms';
-import { UserService } from './user.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   moduleId:    module.id,
@@ -52,17 +52,6 @@ export class UserListComponent implements OnInit{
                   })
                   .catch(error => this.error = error);
   }
-
-  // submitEdit(user) {
-  //   this.http.put("/users/"+user._id, JSON.stringify(user), this.options).subscribe(
-  //     res => {
-  //       this.isEditing = false;
-  //       this.user = user;
-  //       this.sendInfoMsg("item edited successfully.", "success");
-  //     },
-  //     error => console.log(error)
-  //   );
-  // }
 
   cancelEditing() {
     this.isEditing = false;

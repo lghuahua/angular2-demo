@@ -3,12 +3,14 @@ import { Router }                               from '@angular/router';
 import {  Http, Headers, RequestOptions }       from '@angular/http';
 import { FormGroup, FormControl, Validators,
  FormBuilder, REACTIVE_FORM_DIRECTIVES }        from '@angular/forms';
-
+import { UserService } from '../services/user.service';
+import { ErrorService } from '../services/error.service';
 
 @Component({
   moduleId:    module.id,
   templateUrl: 'components/login/login.html',
-  directives:  [REACTIVE_FORM_DIRECTIVES]
+  directives:  [REACTIVE_FORM_DIRECTIVES],
+  providers: [UserService]
 })
 
 export class LoginComponent {
@@ -19,7 +21,11 @@ export class LoginComponent {
   userform: FormGroup;
   name     = new FormControl("", Validators.required);
   password = new FormControl("", Validators.required);
-  constructor(private http: Http, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private http: Http,
+              private formBuilder: FormBuilder,
+              private service: UserService,
+              private errorService: ErrorService,
+              private router: Router) {
     this.userform = formBuilder.group({
       name:     this.name,
       password: this.password
@@ -27,13 +33,19 @@ export class LoginComponent {
   }
 
   login() {
-    this.http.post("/users/login", JSON.stringify(this.userform.value), this.options).subscribe(
-      res => {
-        window.sessionStorage.setItem('token', JSON.parse(res._body).token);
-        this.router.navigate(['list'])
-      },
-      error => console.log(error)
-    );
+    this.service.login(JSON.stringify(this.userform.value))
+                .then(res => {
+                  sessionStorage.setItem('token', res.token);
+                  this.service.setCurrentUser(res.userobj);
+                  this.router.navigate(['user'])
+                })
+                .catch(error => this.sendInfoMsg(error, "warning", 2000))
+  }
+
+  sendInfoMsg(body, type, time = 3000) {
+    this.errorService.p_informsg(body);
+    this.errorService.p_type(type);
+    setTimeout(() => this.errorService.p_informsg(''), time);
   }
 
   newUser() {

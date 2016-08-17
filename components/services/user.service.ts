@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators,
 import 'rxjs/add/operator/toPromise';
 import {AuthHttp, JwtHelper} from "angular2-jwt";
 
-import { User } from './user.model';
+import { User } from '../users/user.model';
 
 
 @Injectable()
@@ -15,7 +15,7 @@ export class UserService {
   currentUser:User = new User();
   options = new RequestOptions;
   private _jwtHelper:JwtHelper = new JwtHelper();
-  constructor(private http: Http){
+  constructor(private http: Http, private router: Router){
     let userLocal = sessionStorage.getItem('currentUser');
     let token = sessionStorage.getItem('token');
     this.options = new RequestOptions({ headers: new Headers({
@@ -23,7 +23,7 @@ export class UserService {
       'charset': "UTF-8",
       'x-access-token': token})
     });
-    if(userLocal && token){
+    if(userLocal && userLocal != 'undefined' && token){
       let currentUser = JSON.parse(userLocal);
       let decode = this._jwtHelper.decodeToken(token);
       if(currentUser._id != decode.id){
@@ -43,18 +43,17 @@ export class UserService {
   }
 
   editUser(user){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
     let url = `/users/${user._id}`
-    return this.http.put(url, JSON.stringify(user), {headers: headers})
+    return this.http.put(url, JSON.stringify(user),  this.options)
                . toPromise()
                .then(response => response.statusText)
+               .catch(this.handleError);
   }
 
 
   private handleError(error: any) {
     console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
+    return Promise.reject(error.message || error.json().message);
   }
 
   addNewUser(user){
@@ -71,6 +70,13 @@ export class UserService {
   setCurrentUser(user){
     sessionStorage.setItem('currentUser',JSON.stringify(user));
     this.currentUser = user;
+  }
+
+  login(user){
+    return this.http.post("/users/login", user, this.options)
+                .toPromise()
+                .then(response => response.json())
+                .catch(this.handleError)
   }
 
 }

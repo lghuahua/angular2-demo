@@ -1,27 +1,28 @@
 import { Component, OnInit }                       from '@angular/core';
-import { Router }                                  from '@angular/router';
-import { ROUTER_DIRECTIVES, RouteParams }          from '@angular/router-deprecated';
+import { Router, ActivatedRoute, Params}           from '@angular/router';
 import { ErrorService }                            from '../services/error.service';
 import { UserService }                             from '../services/user.service';
 import { User }                                    from './user.model';
 
+
 @Component({
   moduleId: module.id,
-  templateUrl: 'components/users/user.html',
-  directives:[ROUTER_DIRECTIVES]
+  templateUrl: 'components/users/user.html'
 })
 
-export class UserComponent implements OnInit{
+export class UserComponent{
   private user:User = new User();
-  constructor(private router: Router){}
-
-  ngOnInit(){
-    // let name = this._params.get('name')
+  name:string;
+  constructor(private router: Router,
+              private route: ActivatedRoute){
+    route.params.forEach((params:Params) => {
+      name = params['name']
+    })
     let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
-    if(currentUser && currentUser != 'undefined'){
+    if(currentUser && name == currentUser.name  && currentUser != 'undefined'){
       this.user = currentUser
     } else {
-      this.router.navigate(['home'])
+      router.navigate(['/login'])
     }
   }
 }

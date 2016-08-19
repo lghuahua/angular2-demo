@@ -12,7 +12,7 @@ import { User } from '../users/user.model';
 @Injectable()
 
 export class UserService {
-  currentUser:User  = new User();
+  private currentUser:User  = new User();
   options           = new RequestOptions;
   private _jwtHelper:JwtHelper = new JwtHelper();
   constructor(private http: Http, private router: Router){
@@ -81,6 +81,7 @@ export class UserService {
 
   logout(){
     if(this.currentUser){
+      this.currentUser = null;
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('currentUser')
       this.router.navigate(['home'])

@@ -5,3 +5,4 @@ node_modules/**/*
 typings
 components/**/*.js
 public/*.js
+public/images

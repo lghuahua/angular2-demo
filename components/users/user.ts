@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
               private route: ActivatedRoute){}
 
   ngOnInit(){
-    this.user = this.userService.getCurrentUser();
+    this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+    // this.user = this.userService.getCurrentUser();
   }
 }

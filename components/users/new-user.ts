@@ -56,9 +56,9 @@ export class NewUserComponent {
                     sessionStorage.setItem('token', res.token);
                     this.sendInfoMsg('注册成功','success');
                     this.service.setCurrentUser(res.userobj);
-                    this.router.navigate(['user'])
+                    this.router.navigate(['/user',res.userobj.name])
                   })
-                  .catch(error => this.sendInfoMsg(error.message, "warning", 2000))
+                  .catch(error => this.sendInfoMsg(error, "warning", 2000))
     } else {
       this.sendInfoMsg("两次输入密码不同", "warning")
     }

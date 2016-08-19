@@ -7,7 +7,7 @@ import { UserService } from '../services/user.service';
   selector:    'helloWorld',
   templateUrl: 'components/main/app.html',
   directives:  [ROUTER_DIRECTIVES],
-  providers: [ErrorService, UserService]
+  providers: [ErrorService]
 })
 
 export class AppComponent {

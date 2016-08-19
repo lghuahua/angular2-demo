@@ -1,4 +1,5 @@
 import { provideRouter, RouterConfig} from '@angular/router';
+import { UserGuard } from './services/user-guard.service';
 import { HelloWorldComponent,
   LoginComponent,
   NewUserComponent,
@@ -11,7 +12,7 @@ const routes: RouterConfig = [
   { path: 'home', component: HelloWorldComponent },
   { path: 'login', component: LoginComponent },
   { path: 'new_user', component: NewUserComponent },
-  { path: 'user/:name', component: UserComponent },
+  { path: 'user/:name', component: UserComponent, canActivate: [UserGuard]},
   { path: 'list', component: UserListComponent },
   { path: '**', component: HelloWorldComponent }
 ];

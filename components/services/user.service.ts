@@ -12,8 +12,8 @@ import { User } from '../users/user.model';
 @Injectable()
 
 export class UserService {
-  currentUser:User = new User();
-  options = new RequestOptions;
+  currentUser:User  = new User();
+  options           = new RequestOptions;
   private _jwtHelper:JwtHelper = new JwtHelper();
   constructor(private http: Http, private router: Router){
     let userLocal = sessionStorage.getItem('currentUser');

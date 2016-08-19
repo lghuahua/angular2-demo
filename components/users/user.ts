@@ -10,19 +10,14 @@ import { User }                                    from './user.model';
   templateUrl: 'components/users/user.html'
 })
 
-export class UserComponent{
+export class UserComponent implements OnInit {
   private user:User = new User();
   name:string;
   constructor(private router: Router,
-              private route: ActivatedRoute){
-    route.params.forEach((params:Params) => {
-      name = params['name']
-    })
-    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
-    if(currentUser && name == currentUser.name  && currentUser != 'undefined'){
-      this.user = currentUser
-    } else {
-      router.navigate(['/login'])
-    }
+              private userService: UserService,
+              private route: ActivatedRoute){}
+
+  ngOnInit(){
+    this.user = this.userService.getCurrentUser();
   }
 }

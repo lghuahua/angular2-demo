@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var tokenCur   = require('../helpers/sessions.js');
 
 router.post('/new', tokenCur.isAuth, function(req, res){
-  console.log(req.body)
   var micropost = new Micropost({
       content: req.body.content,
       user_id: req.body.user_id
@@ -23,4 +22,16 @@ router.post('/new', tokenCur.isAuth, function(req, res){
     }
   })
 });
+
+
+router.get("/:id", tokenCur.isAuth, function(req, res){
+  Micropost.find({user_id: req.params.id})
+    .exec(function(err, result){
+    if(err) return console.error(err);
+    res.json(result);
+  })
+})
+
+
+
 module.exports = router;

@@ -30,4 +30,11 @@ export class MicropostService {
     return Promise.reject(error.message || error.json().message);
   }
 
+  getMicropost(id){
+    return this.http.get("/micropost/" + id, this.options)
+                .toPromise()
+                .then(response => response.json())
+                .catch(this.handleError);
+  }
+
 }

@@ -19,8 +19,9 @@ export class UserComponent implements OnInit {
   name:string;
   micropostForm: FormGroup;
   content = new FormControl("", Validators.required);
-
+  microposts = [];
   constructor(private router: Router,
+              private errorService: ErrorService,
               private micropostService: MicropostService,
               private userService: UserService,
               private formBuilder: FormBuilder,
@@ -34,13 +35,25 @@ export class UserComponent implements OnInit {
       user_id: this.user._id,
       content: this.content
     });
+    this.loadMicropost(this.user._id)
     // this.user = this.userService.getCurrentUser();
+  }
+
+  sendInfoMsg(body, type, time = 3000) {
+    this.errorService.p_informsg(body);
+    this.errorService.p_type(type);
+    setTimeout(() => this.errorService.p_informsg(''), time);
   }
 
   creatMicropost(){
     this.micropostService.newMicropost(JSON.stringify(this.micropostForm.value))
-        .then()
-        .catch()
+        .then(res => this.loadMicropost(this.user._id))
+        .catch(error => this.sendInfoMsg(error, "warning", 2000))
+  }
 
+  loadMicropost(id){
+    this.micropostService.getMicropost(id)
+                .then(data => this.microposts = data)
+                .catch(error => this.sendInfoMsg(error, "warning", 2000));
   }
 }

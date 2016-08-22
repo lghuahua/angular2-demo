@@ -13,5 +13,7 @@
   </div>
 </div>
 <div class='userright'>
-  <h2>{{user.address}}</h2>
+  <ul  *ngFor="let micro of microposts">
+    <li>{{micro.content}}</li>
+  </ul>
 </div>

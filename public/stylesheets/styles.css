@@ -52,6 +52,10 @@ header {
   float: left;
 }
 
+.userright li{
+  list-style: none;
+}
+
 /*.user-info {
   display: inline-flex;
 }*/

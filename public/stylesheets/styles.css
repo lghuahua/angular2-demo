@@ -43,8 +43,26 @@ header {
   width: 30%;
 }
 
+.userleft img{
+  width: 80px;
+  height: 80px;
+}
+
 .userright {
   float: left;
+}
+
+/*.user-info {
+  display: inline-flex;
+}*/
+
+.user-info textarea {
+  height: 100px;
+  margin-bottom: 5px;
+}
+
+.userpic{
+  margin: 10px;
 }
 
 table th, table tr td {

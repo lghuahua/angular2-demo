@@ -10,6 +10,7 @@ import { disableDeprecatedForms,
 import { HTTP_PROVIDERS }             from '@angular/http';
 import { UserService }                from '../components/services/user.service';
 import { UserGuard }                  from '../components/services/user-guard.service';
+// import { MicropostService }  from '../components/services/micropost.service';
 
 // import 'jquery'
 

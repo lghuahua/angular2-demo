@@ -20,12 +20,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 var users = require('./routes/users');
+var micropost = require('./routes/micropost');
 app.use('/public', express.static(__dirname + '/public'));
 app.use('/public/scripts', express.static(__dirname + '/node_modules'));
 app.use(express.static('./'))
 
 // api
 app.use('/users', users);
+app.use('/micropost', micropost);
 
 // angular
 app.get('/*', function(req, res) {

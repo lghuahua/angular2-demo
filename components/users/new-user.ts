@@ -21,7 +21,6 @@ export class NewUserComponent {
     'charset': "UTF-8" })
   });
   adduserform: FormGroup;
-  id = new FormControl("");
   name = new FormControl("", Validators.required);
   password = new FormControl("", Validators.required);
   confirm_password = new FormControl("", Validators.required);

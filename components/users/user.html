@@ -1,6 +1,16 @@
-<h1>用户界面</h1>
 <div class='userleft'>
-<h2>{{user.name}}</h2>
+  <div class="user-info">
+    <div style="display: inline-flex;">
+      <img class="userpic" src="public/images/01.jpg">
+      <h4>{{user.name}}</h4>
+    </div>
+    <form [formGroup]="micropostForm" (ngSubmit)="creatMicropost()">
+      <div>
+        <textarea name="content" row="4" cols="40" formControlName="content"></textarea>
+      </div>
+      <button type="submit">保存</button>
+    </form>
+  </div>
 </div>
 <div class='userright'>
   <h2>{{user.address}}</h2>

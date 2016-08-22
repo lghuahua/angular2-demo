@@ -5,7 +5,7 @@ var uniqueValidator =  require('mongoose-unique-validator');
 var micropostSchema = new mongoose.Schema({
     content   : { type : String, required: true},
     time      : { type : Date,  default: Date.now},
-    user_id   : { type : Number, ref: 'User'}
+    user_id   : { type : String, ref: 'User'}
 });
 
 micropostSchema.plugin(uniqueValidator);

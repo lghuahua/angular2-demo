@@ -4,25 +4,26 @@
   "description": "angular2_demo",
   "main": "angular2.js",
   "scripts": {
+    "tsc" : "tsc",
     "browserify": "browserify -t babelify ./public/bootstrap.js -o ./public/bundle.js",
     "uglifyjs": "uglifyjs bundle.js --screw-ie8 --compress > bundle.min.js",
-    "start": "npm run uglifyjs",
+    "clean" : "find components/ -name '*.js' -type f -exec rm -rf {} \\;",
+    "start": "npm run clean && npm run browserify && node myapp.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@angular/common": "^2.0.0-rc.4",
-    "@angular/compiler": "^2.0.0-rc.4",
-    "@angular/core": "^2.0.0-rc.4",
-    "@angular/forms": "^0.2.0",
-    "@angular/http": "^2.0.0-rc.4",
-    "@angular/platform-browser": "^2.0.0-rc.4",
-    "@angular/platform-browser-dynamic": "^2.0.0-rc.4",
-    "@angular/router": "^3.0.0-beta.2",
-    "@angular/router-deprecated": "^2.0.0-rc.2",
-    "@angular/upgrade": "^2.0.0-rc.4",
-    "angular2-jwt": "^0.1.18",
+    "@angular/common": "~2.1.0",
+    "@angular/compiler": "~2.1.0",
+    "@angular/core": "~2.1.0",
+    "@angular/forms": "~2.1.0",
+    "@angular/http": "~2.1.0",
+    "@angular/platform-browser": "~2.1.0",
+    "@angular/platform-browser-dynamic": "~2.1.0",
+    "@angular/router": "~3.1.0",
+    "@angular/upgrade": "~2.1.0",
+    "angular2-jwt": "^0.1.24",
     "babel-polyfill": "^6.3.14",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
@@ -34,10 +35,10 @@
     "jsonwebtoken": "^7.1.8",
     "mongoose-unique-validator": "^1.0.2",
     "morgan": "^1.7.0",
-    "reflect-metadata": "^0.1.3",
-    "rxjs": "^5.0.0-beta.6",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "5.0.0-beta.12",
     "uglify-js": "^1.3.5",
-    "zone.js": "^0.6.12"
+    "zone.js": "^0.6.25"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",
@@ -50,8 +51,8 @@
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
     "mongoose": "^4.5.7",
-    "typescript": "^1.8.10",
-    "typings": "^1.3.2",
+    "typescript": "^2.0.3",
+    "typings": "^1.4.0",
     "watchify": "^3.7.0"
   }
 }

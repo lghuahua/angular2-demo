@@ -1,5 +1,6 @@
-import { provideRouter, RouterConfig} from '@angular/router';
-import { UserGuard } from './services/user-guard.service';
+import { ModuleWithProviders }   from '@angular/core';
+import { Routes, RouterModule}   from '@angular/router';
+import { UserGuard }             from './services/user-guard.service';
 import { HelloWorldComponent,
   LoginComponent,
   NewUserComponent,
@@ -7,7 +8,7 @@ import { HelloWorldComponent,
   UserComponent
 } from './components';
 
-const routes: RouterConfig = [
+const appRoutes: Routes = [
   { path: '', redirectTo:'home', pathMatch: 'full'},
   { path: 'home', component: HelloWorldComponent },
   { path: 'login', component: LoginComponent },
@@ -16,7 +17,4 @@ const routes: RouterConfig = [
   { path: 'list', component: UserListComponent },
   { path: '**', component: HelloWorldComponent }
 ];
-
-export const appRouterProviders = [
-  provideRouter(routes)
-];
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

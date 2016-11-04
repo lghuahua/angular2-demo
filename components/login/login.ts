@@ -1,15 +1,14 @@
-import { Component }                    from '@angular/core';
-import { Router }                               from '@angular/router';
-import {  Http, Headers, RequestOptions }       from '@angular/http';
-import { FormGroup, FormControl, Validators,
- FormBuilder, REACTIVE_FORM_DIRECTIVES }        from '@angular/forms';
-import { UserService } from '../services/user.service';
-import { ErrorService } from '../services/error.service';
+import { Component, Inject }                  from '@angular/core';
+import { Router }                             from '@angular/router';
+import {  Http, Headers, RequestOptions }     from '@angular/http';
+import { FormGroup, FormControl,
+        Validators, FormBuilder }             from '@angular/forms';
+import { UserService }                        from '../services/user.service';
+import { ErrorService }                       from '../services/error.service';
 
 @Component({
   moduleId:    module.id,
   templateUrl: 'components/login/login.html',
-  directives:  [REACTIVE_FORM_DIRECTIVES],
   providers: [UserService]
 })
 
@@ -21,8 +20,8 @@ export class LoginComponent {
   userform: FormGroup;
   name     = new FormControl("", Validators.required);
   password = new FormControl("", Validators.required);
-  constructor(private http: Http,
-              private formBuilder: FormBuilder,
+  constructor(@Inject(FormBuilder) formBuilder: FormBuilder,
+              private http: Http,
               private service: UserService,
               private errorService: ErrorService,
               private router: Router) {

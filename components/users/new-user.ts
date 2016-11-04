@@ -1,20 +1,18 @@
 import { Component, OnInit }                  from '@angular/core';
 import { Router }                             from '@angular/router';
 import {  Http, Headers, RequestOptions }     from '@angular/http';
-import { FormGroup, FormControl, Validators,
-  FormBuilder, REACTIVE_FORM_DIRECTIVES }     from '@angular/forms';
-import { UserService } from '../services/user.service';
-import { ErrorService } from '../services/error.service';
+import { FormGroup, FormControl,
+         Validators, FormBuilder }            from '@angular/forms';
+import { UserService }                        from '../services/user.service';
+import { ErrorService }                       from '../services/error.service';
 
 @Component({
   moduleId: module.id,
   templateUrl: 'components/users/new-user.html',
-  directives: [REACTIVE_FORM_DIRECTIVES],
   providers: [UserService]
 })
 
 export class NewUserComponent {
-
   user = [];
   options = new RequestOptions({ headers: new Headers({
     'Content-Type': "application/json",
@@ -27,7 +25,7 @@ export class NewUserComponent {
   age = new FormControl("");
   address = new FormControl("");
   infoMsg   = { body: "", type: "info"};
-
+  // 文档中改为 @Inject(FormBuilder) formBuilder: FormBuilder
   constructor(private http: Http,
               private formBuilder: FormBuilder,
               private router: Router,

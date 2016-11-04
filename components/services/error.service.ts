@@ -1,5 +1,5 @@
-import { Injectable, OnInit }                  from '@angular/core';
-import { Subject }    from 'rxjs/Subject';
+import { Injectable, OnInit }      from '@angular/core';
+import { Subject }                 from 'rxjs/Subject';
 
 
 @Injectable()

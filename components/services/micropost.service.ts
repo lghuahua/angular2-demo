@@ -1,10 +1,9 @@
-import { Injectable, OnInit }                  from '@angular/core';
-import { Router }                             from '@angular/router';
-import {  Http, Headers, RequestOptions}     from '@angular/http';
+import { Injectable, OnInit }                from '@angular/core';
+import { Router }                            from '@angular/router';
+import { Http, Headers, RequestOptions}      from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {AuthHttp, JwtHelper} from "angular2-jwt";
-
-import { User } from '../users/user.model';
+import { AuthHttp, JwtHelper}                from "angular2-jwt";
+import { User }                              from '../users/user.model';
 
 
 @Injectable()

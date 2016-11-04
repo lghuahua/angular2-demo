@@ -1,19 +1,17 @@
-import { Injectable, OnInit }                  from '@angular/core';
-import { Router }                             from '@angular/router';
-import {  Http, Headers, RequestOptions}     from '@angular/http';
-import { FormGroup, FormControl, Validators,
-  FormBuilder, REACTIVE_FORM_DIRECTIVES }     from '@angular/forms';
+import { Injectable, OnInit }               from '@angular/core';
+import { Router }                           from '@angular/router';
+import { Http, Headers, RequestOptions}     from '@angular/http';
+import { FormGroup, FormControl,
+        Validators, FormBuilder }           from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
-import {AuthHttp, JwtHelper} from "angular2-jwt";
-
-import { User } from '../users/user.model';
-
+import { AuthHttp, JwtHelper}               from "angular2-jwt";
+import { User }                             from '../users/user.model';
 
 @Injectable()
 
 export class UserService {
   private currentUser:User  = new User();
-  options           = new RequestOptions;
+  options = new RequestOptions;
   private _jwtHelper:JwtHelper = new JwtHelper();
   constructor(private http: Http, private router: Router){
     let userLocal = sessionStorage.getItem('currentUser');

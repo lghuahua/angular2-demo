@@ -1,16 +1,15 @@
-import { Component, OnInit }                       from '@angular/core';
-import { Router, ActivatedRoute, Params}           from '@angular/router';
-import { ErrorService }                            from '../services/error.service';
-import { UserService }                             from '../services/user.service';
-import { User }                                    from './user.model';
-import { FormGroup, FormControl, Validators,
-  FormBuilder, REACTIVE_FORM_DIRECTIVES }     from '@angular/forms';
-import { MicropostService }  from '../services/micropost.service';
+import { Component, OnInit, Inject }            from '@angular/core';
+import { Router, ActivatedRoute, Params}        from '@angular/router';
+import { ErrorService }                         from '../services/error.service';
+import { UserService }                          from '../services/user.service';
+import { User }                                 from './user.model';
+import { FormGroup, FormControl,
+        Validators, FormBuilder }               from '@angular/forms';
+import { MicropostService }                     from '../services/micropost.service';
 
 @Component({
   moduleId: module.id,
   templateUrl: 'components/users/user.html',
-  directives: [REACTIVE_FORM_DIRECTIVES],
   providers: [MicropostService]
 })
 
@@ -20,23 +19,21 @@ export class UserComponent implements OnInit {
   micropostForm: FormGroup;
   content = new FormControl("", Validators.required);
   microposts = [];
-  constructor(private router: Router,
+  constructor(@Inject(FormBuilder) formBuilder: FormBuilder,
+              private router: Router,
               private errorService: ErrorService,
               private micropostService: MicropostService,
               private userService: UserService,
-              private formBuilder: FormBuilder,
               private route: ActivatedRoute){
-
-  }
-
-  ngOnInit(){
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
-    this.micropostForm = this.formBuilder.group({
+    this.micropostForm = formBuilder.group({
       user_id: this.user._id,
       content: this.content
     });
+  }
+
+  ngOnInit(){
     this.loadMicropost(this.user._id)
-    // this.user = this.userService.getCurrentUser();
   }
 
   sendInfoMsg(body, type, time = 3000) {
@@ -49,6 +46,7 @@ export class UserComponent implements OnInit {
     this.micropostService.newMicropost(JSON.stringify(this.micropostForm.value))
         .then(res => this.loadMicropost(this.user._id))
         .catch(error => this.sendInfoMsg(error, "warning", 2000))
+    this.micropostForm.value.content = ''
   }
 
   loadMicropost(id){

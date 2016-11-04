@@ -1,14 +1,12 @@
-import { Component, OnInit }                  from '@angular/core';
-import { Router }                             from '@angular/router';
-import {  Http, Headers, RequestOptions }     from '@angular/http';
-import { FormGroup, FormControl, Validators,
-  FormBuilder, REACTIVE_FORM_DIRECTIVES }     from '@angular/forms';
-import { UserService } from '../services/user.service';
+import { Component, OnInit }                      from '@angular/core';
+import { Router }                                 from '@angular/router';
+import {  Http, Headers, RequestOptions }         from '@angular/http';
+import { FormGroup, FormControl, Validators,}     from '@angular/forms';
+import { UserService }                            from '../services/user.service';
 
 @Component({
   moduleId:    module.id,
   templateUrl: 'components/users/user-list.html',
-  directives:  [REACTIVE_FORM_DIRECTIVES],
   providers: [UserService]
 })
 
@@ -23,7 +21,6 @@ export class UserListComponent implements OnInit{
   infoMsg   = { body: "", type: "info"};
   error: any;
   constructor(private http: Http,
-              private formBuilder: FormBuilder,
               private router: Router,
               private service: UserService) {}
 

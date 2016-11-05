@@ -4,7 +4,7 @@ import { UserService }       from '../services/user.service';
 
 @Component({
   selector:    'helloWorld',
-  templateUrl: 'components/main/app.html',
+  templateUrl: 'app.html',
   providers: [ErrorService]
 })
 

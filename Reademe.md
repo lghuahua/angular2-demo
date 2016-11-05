@@ -11,4 +11,6 @@ npm install
     "uglifyjs bundle.js --screw-ie8 --compress > bundle.min.js"
 
 - 运行
+  npm run clean //清理编译生成的js
+  npm run tsc
   npm run start

@@ -8,7 +8,7 @@
     "browserify": "browserify -t babelify ./public/bootstrap.js -o ./public/bundle.js",
     "uglifyjs": "uglifyjs bundle.js --screw-ie8 --compress > bundle.min.js",
     "clean" : "find components/ -name '*.js' -type f -exec rm -rf {} \\;",
-    "start": "npm run clean && npm run browserify && node myapp.js",
+    "start": "npm run browserify && node myapp.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

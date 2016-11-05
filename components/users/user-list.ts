@@ -6,7 +6,7 @@ import { UserService }                            from '../services/user.service
 
 @Component({
   moduleId:    module.id,
-  templateUrl: 'components/users/user-list.html',
+  templateUrl: 'user-list.html',
   providers: [UserService]
 })
 

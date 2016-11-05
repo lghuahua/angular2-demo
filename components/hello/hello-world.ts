@@ -3,7 +3,7 @@ import { Router }        from '@angular/router';
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'components/hello/hello-world.html'
+  templateUrl: 'hello-world.html'
 })
 
 export class HelloWorldComponent {

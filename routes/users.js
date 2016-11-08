@@ -70,7 +70,7 @@ router.put('/:id', function(req, res){
 router.delete('/:id', function(req, res){
   User.findOneAndRemove({_id: req.params.id}, function(err){
     if(err) return console.error(err);
-    res.sendStatus(200);
+    res.sendStatus(204);
   })
 })
 

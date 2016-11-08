@@ -16,4 +16,9 @@ export class ErrorService {
   p_type(type:string){
     this.type.next(type);
   }
+  sendInfoMsg(body, type, time = 3000) {
+    this.p_informsg(body);
+    this.p_type(type);
+    setTimeout(() => this.p_informsg(''), time);
+  }
 }

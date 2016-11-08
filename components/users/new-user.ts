@@ -40,24 +40,18 @@ export class NewUserComponent {
     });
   }
 
-  sendInfoMsg(body, type, time = 3000) {
-    this.errorService.p_informsg(body);
-    this.errorService.p_type(type);
-    setTimeout(() => this.errorService.p_informsg(''), time);
-  }
-
   addUser() {
     if(this.adduserform.value.password == this.adduserform.value.confirm_password){
       this.service.addNewUser(JSON.stringify(this.adduserform.value))
                   .then(res => {
                     sessionStorage.setItem('token', res.token);
-                    this.sendInfoMsg('注册成功','success');
+                    this.errorService.sendInfoMsg('注册成功','success');
                     this.service.setCurrentUser(res.userobj);
                     this.router.navigate(['/user',res.userobj.name])
                   })
-                  .catch(error => this.sendInfoMsg(error, "warning", 2000))
+                  .catch(error => this.errorService.sendInfoMsg(error, "warning", 2000))
     } else {
-      this.sendInfoMsg("两次输入密码不同", "warning")
+      this.errorService.sendInfoMsg("两次输入密码不同", "warning")
     }
   }
 

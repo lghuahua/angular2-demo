@@ -38,13 +38,7 @@ export class LoginComponent {
                   this.service.setCurrentUser(res.userobj);
                   this.router.navigate(['user',res.userobj.name])
                 })
-                .catch(error => this.sendInfoMsg(error, "warning", 2000))
-  }
-
-  sendInfoMsg(body, type, time = 3000) {
-    this.errorService.p_informsg(body);
-    this.errorService.p_type(type);
-    setTimeout(() => this.errorService.p_informsg(''), time);
+                .catch(error => this.errorService.sendInfoMsg(error, "warning", 2000))
   }
 
   newUser() {

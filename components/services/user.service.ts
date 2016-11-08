@@ -85,4 +85,11 @@ export class UserService {
       this.router.navigate(['home'])
     }
   }
+
+  deleteUser(user) {
+    return this.http.delete('/users/'+user._id, this.options)
+                .toPromise()
+                .then(response => response.statusText)
+                .catch(this.handleError);
+  }
 }

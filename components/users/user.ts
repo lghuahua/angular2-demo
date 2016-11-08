@@ -36,22 +36,16 @@ export class UserComponent implements OnInit {
     this.loadMicropost(this.user._id)
   }
 
-  sendInfoMsg(body, type, time = 3000) {
-    this.errorService.p_informsg(body);
-    this.errorService.p_type(type);
-    setTimeout(() => this.errorService.p_informsg(''), time);
-  }
-
   creatMicropost(){
     this.micropostService.newMicropost(JSON.stringify(this.micropostForm.value))
         .then(res => this.loadMicropost(this.user._id))
-        .catch(error => this.sendInfoMsg(error, "warning", 2000))
+        .catch(error => this.errorService.sendInfoMsg(error, "warning", 2000))
     this.micropostForm.value.content = ''
   }
 
   loadMicropost(id){
     this.micropostService.getMicropost(id)
                 .then(data => this.microposts = data)
-                .catch(error => this.sendInfoMsg(error, "warning", 2000));
+                .catch(error => this.errorService.sendInfoMsg(error, "warning", 2000));
   }
 }

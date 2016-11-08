@@ -3,8 +3,9 @@ import { ErrorService }      from '../services/error.service';
 import { UserService }       from '../services/user.service';
 
 @Component({
-  selector:    'helloWorld',
-  templateUrl: 'app.html',
+  moduleId: module.id,
+  selector:    'myApp',
+  templateUrl: 'components/main/app.html',
   providers: [ErrorService]
 })
 

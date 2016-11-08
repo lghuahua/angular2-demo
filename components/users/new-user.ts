@@ -8,7 +8,7 @@ import { ErrorService }                       from '../services/error.service';
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'new-user.html',
+  templateUrl: '/components/users/new-user.html',
   providers: [UserService]
 })
 

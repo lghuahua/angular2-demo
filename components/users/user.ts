@@ -9,7 +9,7 @@ import { MicropostService }                     from '../services/micropost.serv
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'user.html',
+  templateUrl: '/components/users/user.html',
   providers: [MicropostService]
 })
 
